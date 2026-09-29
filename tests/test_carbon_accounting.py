@@ -29,7 +29,6 @@ from src.carbon_accounting import (
     CATEGORY_PROCUREMENT,
     CATEGORY_TRAVEL,
     CATEGORY_WASTE,
-    DEFAULT_EMISSION_FACTORS,
     CarbonAccountingSummary,
     EmissionFactor,
     EmissionFactorRegistry,

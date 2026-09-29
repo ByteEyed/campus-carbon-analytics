@@ -120,49 +120,15 @@ class EmissionFactor:
             )
 
 
-# Documented default emission factors from recognized environmental bodies
-# Electricity: Central Electricity Authority (CEA) India CO2 Baseline Database v19
-# Travel: UK DESNZ / DEFRA 2023.1 GHG Conversion Factors (passenger transport mix)
-# Waste: UK DESNZ / DEFRA 2023.1 GHG Conversion Factors (commercial/industrial waste disposal)
-# Procurement: CEDA / ADB Input-Output EEIO Multipliers for Indian Economy
-DEFAULT_EMISSION_FACTORS: list[EmissionFactor] = [
-    EmissionFactor(
-        category=CATEGORY_ELECTRICITY,
-        activity_type="electricity_kwh",
-        unit="kgCO2e/kWh",
-        factor=0.716,
-        source="Central Electricity Authority (CEA), Ministry of Power, Govt of India: CO2 Baseline Database for the Indian Power Sector",
-        version="Version 19.0 (2024)",
-    ),
-    EmissionFactor(
-        category=CATEGORY_TRAVEL,
-        activity_type="travel_km",
-        unit="kgCO2e/km",
-        factor=0.140,
-        source="UK Department for Energy Security and Net Zero (DESNZ) / DEFRA: GHG Conversion Factors for Company Reporting (Passenger Vehicles & Transit Mix)",
-        version="2023.1",
-    ),
-    EmissionFactor(
-        category=CATEGORY_WASTE,
-        activity_type="waste_kg",
-        unit="kgCO2e/kg",
-        factor=0.446,
-        source="UK Department for Energy Security and Net Zero (DESNZ) / DEFRA: GHG Conversion Factors for Company Reporting (Waste Disposal - Commercial & Industrial Waste)",
-        version="2023.1",
-    ),
-    EmissionFactor(
-        category=CATEGORY_PROCUREMENT,
-        activity_type="procurement_inr",
-        unit="kgCO2e/INR",
-        factor=0.00042,
-        source="Centre for Economic Data and Analysis (CEDA) / ADB Input-Output GHG Multipliers for Indian Economic Sectors (Education & Commercial Supplies)",
-        version="2023",
-    ),
-]
-
-
 class EmissionFactorRegistry:
-    """Configurable registry storing and managing documented emission factors."""
+    """
+    Configurable registry storing and managing documented emission factors.
+
+    Note on Unit Validation:
+    Unit validation between registered emission factor units (e.g. kgCO2e/kWh)
+    and activity data columns is currently the responsibility of the caller
+    and relies on the strict schema defined in DATA_DICTIONARY.md.
+    """
 
     def __init__(self, factors: Sequence[EmissionFactor] | None = None) -> None:
         self._factors_by_key: dict[str, EmissionFactor] = {}
@@ -252,10 +218,12 @@ class EmissionFactorRegistry:
     @classmethod
     def default(cls) -> EmissionFactorRegistry:
         """
-        Create registry initialized with documented emission factors.
+        Create registry initialized with documented emission factors loaded directly from CSV.
 
-        Prefers canonical CSV file on disk (single source of truth);
-        falls back to embedded constants if CSV is not found.
+        Raises
+        ------
+        FileNotFoundError
+            If the canonical emission factors file (data/emission_factors.csv) is not found.
         """
         candidates = [
             DEFAULT_FACTORS_CSV_PATH,
@@ -263,13 +231,12 @@ class EmissionFactorRegistry:
         ]
         for p in candidates:
             if p.exists():
-                try:
-                    return cls.from_csv(p)
-                except Exception as exc:
-                    logger.warning("Could not read emission factors from %s: %s", p, exc)
+                return cls.from_csv(p)
 
-        logger.debug("Canonical CSV not accessible; initializing from embedded documented constants.")
-        return cls(DEFAULT_EMISSION_FACTORS)
+        raise FileNotFoundError(
+            f"Default emission factors CSV file not found at '{DEFAULT_FACTORS_CSV_PATH}'. "
+            "Ensure data/emission_factors.csv exists."
+        )
 
 
 def calculate_emissions(activity_value: float, emission_factor: float) -> float:
@@ -484,10 +451,7 @@ def aggregate_emissions_by_category(emissions_df: pd.DataFrame) -> pd.DataFrame:
     waste_tot = float(emissions_df["waste_emissions_kg"].sum())
     proc_tot = float(emissions_df["procurement_emissions_kg"].sum())
 
-    if "total_emissions_kg" in emissions_df.columns:
-        grand_total = float(emissions_df["total_emissions_kg"].sum())
-    else:
-        grand_total = elec_tot + travel_tot + waste_tot + proc_tot
+    grand_total = float(emissions_df["total_emissions_kg"].sum())
 
     categories = [CATEGORY_ELECTRICITY, CATEGORY_TRAVEL, CATEGORY_WASTE, CATEGORY_PROCUREMENT]
     totals = [elec_tot, travel_tot, waste_tot, proc_tot]
@@ -578,7 +542,14 @@ def calculate_category_contributions(emissions_df: pd.DataFrame) -> dict[str, fl
 
 @dataclass
 class CarbonAccountingSummary:
-    """Consolidated summary report of campus carbon accounting analysis."""
+    """
+    Consolidated summary report of campus carbon accounting analysis.
+
+    Note on Units:
+    In this summary and across the analytics pipeline, 'MT' and 'MTCO2e' strictly
+    denote Metric Tonnes of CO2 equivalent (1 Metric Tonne = 1,000 kgCO2e),
+    avoiding any confusion with 'Million Tonnes'.
+    """
 
     total_emissions_kg: float
     total_emissions_mt: float
