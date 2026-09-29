@@ -1,0 +1,7 @@
+budget_tier,budget_inr,optimal_portfolio_id,selected_interventions,num_projects,total_cost_inr,remaining_budget_inr,total_reduction_kg,percentage_reduction,cost_per_kg_reduced,reduction_lower_kg,reduction_upper_kg
+Zero Budget (BAU),0.0,P-00000,None (BAU),0,0.0,0.0,0.0,0.0,inf,0.0,0.0
+INR 5 Lakhs (Small ESG Grant),500000.0,P-10000,INT-001,1,500000.0,0.0,136856.07,9.58,3.65,131491.34,142220.88
+INR 10 Lakhs (Efficiency Budget),1000000.0,P-10110,"INT-001, INT-003, INT-004",3,950000.0,50000.0,225755.02,15.8,4.21,212909.32,238600.78
+INR 25 Lakhs (Medium Retrofit),2500000.0,P-10110,"INT-001, INT-003, INT-004",3,950000.0,1550000.0,225755.02,15.8,4.21,212909.32,238600.78
+INR 35 Lakhs (Major Grant),3500000.0,P-11110,"INT-001, INT-002, INT-003, INT-004",4,3450000.0,50000.0,268715.0,18.8,12.84,255869.3,281560.76
+INR 60 Lakhs (Unconstrained),6000000.0,P-11111,"INT-001, INT-002, INT-003, INT-004, INT-005",5,5250000.0,750000.0,309349.62,21.64,16.97,284557.35,334141.96

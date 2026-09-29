@@ -38,6 +38,14 @@ from src.scenarios.interventions import (
     get_default_interventions,
     sort_interventions,
 )
+from src.scenarios.optimization import (
+    PortfolioResult,
+    evaluate_portfolio,
+    generate_all_portfolios,
+    optimize_portfolio,
+    portfolios_to_dataframe,
+    run_optimization_pipeline,
+)
 
 __all__ = [
     "ACOptimization",
@@ -48,6 +56,7 @@ __all__ = [
     "LEDLighting",
     "LEDLightingRetrofit",
     "LowCarbonTransport",
+    "PortfolioResult",
     "RooftopSolarInstallation",
     "ScenarioEvaluationResult",
     "SolarInstallation",
@@ -56,10 +65,16 @@ __all__ = [
     "WasteSegregationComposting",
     "evaluate_all_interventions",
     "evaluate_intervention",
+    "evaluate_portfolio",
+    "generate_all_portfolios",
     "generate_baseline_activity_bounds",
     "get_12m_baseline",
     "get_default_interventions",
+    "optimize_portfolio",
+    "portfolios_to_dataframe",
+    "run_optimization_pipeline",
     "run_scenario_evaluation_pipeline",
     "scenarios_to_dataframe",
     "sort_interventions",
 ]
+
