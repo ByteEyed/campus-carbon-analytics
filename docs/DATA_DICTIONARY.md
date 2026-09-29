@@ -35,19 +35,30 @@ When transformed for carbon accounting engines, the tabular activity data can al
 
 ## 7. Emission-Factor & Intervention Schemas
 
-### Emission Factors
-Emission factors must be clearly sourced from external documentation (e.g., EPA, DEFRA).
+### 7.1 Emission Factor Registry Schema (`data/emission_factors.csv`)
 
-| Column Name | Data Type | Description | Example |
+Emission factors are documented, externally sourced, and strictly separated from synthetic activity data.
+
+| Column Name | Data Type | Description | Documented Example |
 | :--- | :--- | :--- | :--- |
-| `category` | String | Corresponding activity category. | `Electricity` |
-| `subcategory` | String | Corresponding activity subcategory. | `Grid` |
-| `emission_factor`| Float | Conversion factor to CO2e. | `0.453` |
-| `ef_unit` | String | Unit of the emission factor. | `kgCO2e/kWh` |
-| `source` | String | Documented source of the factor. | `EPA eGRID 2023` |
-| `year_published` | Integer | Year the factor was published. | `2023` |
+| `category` | String | Corresponding activity category (`Electricity`, `Travel`, `Waste`, `Procurement`). | `Electricity` |
+| `activity_type` | String | Specific activity column or sub-type. | `electricity_kwh` |
+| `unit` | String | Physical unit of measurement for the factor. | `kgCO2e/kWh` |
+| `factor` | Float | Multiplier converting activity units to kgCO2e. | `0.716` |
+| `source` | String | Documented institutional source citation. | `Central Electricity Authority (CEA), Ministry of Power, Govt of India` |
+| `version` | String | Official publication version / year. | `Version 19.0 (2024)` |
 
-### Decarbonization Interventions
+#### Documented Default Factors Registry:
+- **Electricity:** `0.716 kgCO2e/kWh` — *Central Electricity Authority (CEA), Ministry of Power, Govt of India: CO2 Baseline Database for the Indian Power Sector, Version 19.0 (2024)*
+- **Travel:** `0.140 kgCO2e/km` — *UK DESNZ / DEFRA: GHG Conversion Factors for Company Reporting (Passenger Vehicles & Transit Mix), 2023.1*
+- **Waste:** `0.446 kgCO2e/kg` — *UK DESNZ / DEFRA: GHG Conversion Factors for Company Reporting (Waste Disposal - Commercial & Industrial Waste), 2023.1*
+- **Procurement:** `0.00042 kgCO2e/INR` — *Centre for Economic Data and Analysis (CEDA) / ADB Input-Output GHG Multipliers for Indian Economic Sectors (Education & Commercial Supplies), 2023*
+
+> [!WARNING]
+> **Scope 3 Boundary & Overlap Note:**
+> EEIO-based procurement factors estimate upstream embodied supply-chain emissions. In comprehensive carbon accounting, spend-based Scope 3 factors may partially overlap with direct Scope 1/2 emissions already captured under electricity or municipal waste. This is an acknowledged methodological characteristic in hybrid GHG protocol accounting.
+
+### 7.2 Decarbonization Interventions
 Used by the scenario optimization engine to select portfolios.
 
 | Column Name | Data Type | Description | Example |

@@ -1,0 +1,5 @@
+category,activity_type,unit,factor,source,version
+Electricity,electricity_kwh,kgCO2e/kWh,0.716,"Central Electricity Authority (CEA), Ministry of Power, Govt of India: CO2 Baseline Database for the Indian Power Sector",Version 19.0 (2024)
+Travel,travel_km,kgCO2e/km,0.140,"UK Department for Energy Security and Net Zero (DESNZ) / DEFRA: GHG Conversion Factors for Company Reporting (Passenger Vehicles & Transit Mix)",2023.1
+Waste,waste_kg,kgCO2e/kg,0.446,"UK Department for Energy Security and Net Zero (DESNZ) / DEFRA: GHG Conversion Factors for Company Reporting (Waste Disposal - Commercial & Industrial Waste)",2023.1
+Procurement,procurement_inr,kgCO2e/INR,0.00042,"Centre for Economic Data and Analysis (CEDA) / ADB Input-Output GHG Multipliers for Indian Economic Sectors (Education & Commercial Supplies)",2023
