@@ -1,0 +1,74 @@
+{
+  "config": {
+    "activity_data_path": "data\\raw\\campus_activity.csv",
+    "emission_factors_path": "data\\emission_factors.csv",
+    "output_dir": "data\\processed\\pipeline_run",
+    "optimization_budget_inr": 2500000.0,
+    "random_seed": 42,
+    "train_months": 24,
+    "forecast_horizon_months": 12,
+    "uncertainty_simulations": 50,
+    "baseline_year": 2025,
+    "fail_fast": true,
+    "export_artifacts_on_finish": true
+  },
+  "validation": {
+    "total_records": 180,
+    "valid_records": 180,
+    "rejected_records": 0,
+    "completeness_percentage": 100.0,
+    "errors_by_type": {
+      "missing_required_columns": 0,
+      "missing_values": 0,
+      "duplicate_records": 0,
+      "invalid_dates": 0,
+      "negative_activity_values": 0,
+      "invalid_building_values": 0,
+      "invalid_numeric_values": 0
+    }
+  },
+  "carbon_accounting": {
+    "total_emissions_kg": 4196188.51,
+    "total_emissions_mt": 4196.1885,
+    "emissions_per_student_kg": 25.48,
+    "category_contributions": {
+      "Electricity": 79.77,
+      "Travel": 14.16,
+      "Waste": 5.2,
+      "Procurement": 0.87
+    }
+  },
+  "optimal_portfolio": {
+    "portfolio_id": "P-10110",
+    "selected_interventions": [
+      "INT-001",
+      "INT-003",
+      "INT-004"
+    ],
+    "num_interventions": 3,
+    "total_cost_inr": 950000.0,
+    "remaining_budget_inr": 1550000.0,
+    "is_feasible": true,
+    "baseline_emissions_kg": 1429225.82,
+    "portfolio_emissions_kg": 1203470.8,
+    "total_absolute_reduction_kg": 225755.02,
+    "percentage_reduction": 15.8,
+    "cost_per_kg_reduced": 4.21,
+    "absolute_reduction_lower_kg": 212909.32,
+    "absolute_reduction_upper_kg": 238600.78,
+    "assumptions": {
+      "budget_inr": 2500000.0,
+      "intervention_names": [
+        "LED Lighting Retrofit",
+        "AC / HVAC Optimization",
+        "Waste Segregation & Composting"
+      ],
+      "intervention_costs": {
+        "INT-001": 500000.0,
+        "INT-003": 300000.0,
+        "INT-004": 150000.0
+      },
+      "is_simulated_assumption": true
+    }
+  }
+}

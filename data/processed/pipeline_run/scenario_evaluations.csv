@@ -1,0 +1,6 @@
+intervention_id,intervention_name,affected_category,implementation_cost_inr,baseline_emissions_kg,scenario_emissions_kg,absolute_reduction_kg,percentage_reduction,cost_per_kg_reduced,absolute_reduction_lower_kg,absolute_reduction_upper_kg
+INT-001,LED Lighting Retrofit,Electricity,500000.0,1429225.82,1292369.75,136856.07,9.58,3.65,131491.34,142220.88
+INT-003,AC / HVAC Optimization,Electricity,300000.0,1429225.82,1357164.85,72060.97,5.04,4.16,69236.17,74885.75
+INT-004,Waste Segregation & Composting,Waste,150000.0,1429225.82,1403740.52,25485.3,1.78,5.89,20490.17,30480.44
+INT-005,Low-Carbon / Sustainable Transport,Travel,1800000.0,1429225.82,1388591.2,40634.62,2.84,44.3,28688.04,52581.2
+INT-002,Rooftop Solar Installation,Electricity,2500000.0,1429225.82,1386265.84,42959.98,3.01,58.19,42959.99,42959.99

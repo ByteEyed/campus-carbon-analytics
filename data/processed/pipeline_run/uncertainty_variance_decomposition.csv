@@ -1,0 +1,4 @@
+target,forecast_variance_kg2,forecast_variance_pct,activity_variance_kg2,activity_variance_pct,ef_variance_kg2,ef_variance_pct,total_variance_kg2
+total_emissions_kg,5971611.39,14.99,3539583.1,8.89,30321285.18,76.12,39832479.66
+electricity_emissions_kg,4135270.69,15.79,4950228.31,18.9,17100977.96,65.31,26186476.97
+travel_emissions_kg,271927.0,2.59,1409928.2,13.44,8811862.39,83.97,10493717.6
