@@ -328,16 +328,16 @@ class RooftopSolarInstallation(BaseIntervention):
 
         # Case 2: Multi-building monthly data (allocate generation across facilities per date)
         if "building" in df.columns and "date" in df.columns and df["building"].nunique() > 1:
-            transformed = vals.copy()
-            for _, group_idx in df.groupby("date").groups.items():
-                date_vals = vals[group_idx]
-                tot_load = float(np.sum(date_vals))
+            series = df[self.target_column].copy().astype(float)
+            for _, group_indices in df.groupby("date").groups.items():
+                date_vals = series.loc[group_indices]
+                tot_load = float(date_vals.sum())
                 if tot_load > 0.0:
                     allocations = g_solar * (date_vals / tot_load)
-                    transformed[group_idx] = np.maximum(0.0, date_vals - allocations)
+                    series.loc[group_indices] = np.maximum(0.0, date_vals - allocations)
                 else:
-                    transformed[group_idx] = 0.0
-            return transformed
+                    series.loc[group_indices] = 0.0
+            return series.to_numpy()
 
         # Case 3: Campus-aggregate series or single-facility series
         return np.maximum(0.0, vals - g_solar)

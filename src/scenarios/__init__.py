@@ -5,14 +5,22 @@ Academic Project: BDS-36 (T.Y. B.Sc. Data Science, Semester V)
 Academic Year: 2026-27
 
 Phase 13: Intervention Scenario Library
-Defines decarbonization interventions and their functional activity calculation contracts:
-1. INT-001: LED Lighting Retrofit
-2. INT-002: Rooftop Solar Installation
-3. INT-003: AC / HVAC Optimization
-4. INT-004: Waste Segregation & Composting
-5. INT-005: Low-Carbon / Sustainable Transport
+Defines decarbonization interventions and their functional activity calculation contracts.
+
+Phase 14: Scenario Evaluation
+Provides isolated One-At-a-Time (OAT) evaluation, Marginal Abatement Cost (MAC) calculations,
+and Phase 12 activity sensitivity bounds propagation.
 """
 
+from src.scenarios.evaluation import (
+    ScenarioEvaluationResult,
+    evaluate_all_interventions,
+    evaluate_intervention,
+    generate_baseline_activity_bounds,
+    get_12m_baseline,
+    run_scenario_evaluation_pipeline,
+    scenarios_to_dataframe,
+)
 from src.scenarios.interventions import (
     INTERVENTION_CATALOG,
     ACOptimization,
@@ -41,10 +49,17 @@ __all__ = [
     "LEDLightingRetrofit",
     "LowCarbonTransport",
     "RooftopSolarInstallation",
+    "ScenarioEvaluationResult",
     "SolarInstallation",
     "SustainableEVTransport",
     "WasteSegregation",
     "WasteSegregationComposting",
+    "evaluate_all_interventions",
+    "evaluate_intervention",
+    "generate_baseline_activity_bounds",
+    "get_12m_baseline",
     "get_default_interventions",
+    "run_scenario_evaluation_pipeline",
+    "scenarios_to_dataframe",
     "sort_interventions",
 ]
