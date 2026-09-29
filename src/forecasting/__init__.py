@@ -5,9 +5,11 @@ Academic Project: BDS-36 (T.Y. B.Sc. Data Science, Semester V)
 Academic Year: 2026-27
 
 Phase 10: Forecasting Baseline Implementation
+Phase 11: Primary Forecasting Model Implementation
 Methodology References:
 - docs/FORECASTING_METHOD.md
 - docs/FORECASTING_BASELINE.md
+- docs/FORECASTING.md
 """
 
 from src.forecasting.baselines import (
@@ -22,6 +24,13 @@ from src.forecasting.experiment import (
     run_experiment,
     split_chronological,
 )
+from src.forecasting.holt_winters import (
+    HoltWintersForecaster,
+    HoltWintersPrediction,
+    evaluate_primary_model,
+    generate_primary_comparison_plot,
+    run_primary_experiment,
+)
 from src.forecasting.metrics import (
     ForecastMetrics,
     calculate_coverage_probability,
@@ -35,7 +44,6 @@ from src.forecasting.metrics import (
 from src.forecasting.models import (
     BaseForecaster,
     ForecastResult,
-    HoltWintersForecaster,
     SeasonalNaiveForecaster,
 )
 from src.forecasting.pipeline import (
@@ -59,6 +67,12 @@ __all__ = [
     "run_baseline_experiment",
     "generate_baseline_comparison_plot",
     "run_experiment",
+    # Primary Model (Phase 11)
+    "HoltWintersForecaster",
+    "HoltWintersPrediction",
+    "evaluate_primary_model",
+    "generate_primary_comparison_plot",
+    "run_primary_experiment",
     # Metrics
     "ForecastMetrics",
     "calculate_mae",
@@ -68,11 +82,10 @@ __all__ = [
     "calculate_residuals",
     "calculate_improvement",
     "evaluate_forecast",
-    # Primary Models & Pipeline
+    # Pipeline & Containers
     "BaseForecaster",
     "ForecastResult",
     "SeasonalNaiveForecaster",
-    "HoltWintersForecaster",
     "prepare_monthly_emissions",
     "split_chronological_data",
     "run_forecast_experiment",

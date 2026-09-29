@@ -85,6 +85,33 @@ class ForecastResult:
             res = np.asarray(self.residuals, dtype=float).ravel()
             object.__setattr__(self, "residuals", res)
 
+    @property
+    def mean(self) -> np.ndarray:
+        """Alias for point forecast matching statsmodels convention."""
+        return self.point_forecast
+
+    @property
+    def mean_ci_lower(self) -> np.ndarray:
+        """Alias for lower bound matching statsmodels convention."""
+        return self.lower_bound
+
+    @property
+    def mean_ci_upper(self) -> np.ndarray:
+        """Alias for upper bound matching statsmodels convention."""
+        return self.upper_bound
+
+    def summary_frame(self, alpha: float = 0.05) -> pd.DataFrame:
+        """
+        Return DataFrame matching statsmodels summary_frame convention.
+
+        Columns: ['mean', 'mean_ci_lower', 'mean_ci_upper']
+        """
+        return pd.DataFrame({
+            "mean": self.point_forecast,
+            "mean_ci_lower": self.lower_bound,
+            "mean_ci_upper": self.upper_bound,
+        })
+
     def to_dataframe(
         self,
         dates: Sequence[str] | pd.DatetimeIndex | pd.Series | None = None,
@@ -257,160 +284,25 @@ class SeasonalNaiveForecaster(BaseForecaster):
         )
 
 
-class HoltWintersForecaster(BaseForecaster):
-    """
-    Holt-Winters Exponential Smoothing Forecaster.
+# Re-export canonical HoltWintersForecaster from holt_winters.py lazily via PEP 562
+from typing import TYPE_CHECKING
 
-    Configured with additive trend and additive seasonality (m=12)
-    per FORECASTING_METHOD.md. Uncertainty is quantified using state-space
-    simulated prediction intervals.
+if TYPE_CHECKING:
+    from src.forecasting.holt_winters import HoltWintersForecaster
 
-    Parameters
-    ----------
-    trend : str, default "add"
-        Type of trend component ('add' or None).
-    seasonal : str, default "add"
-        Type of seasonal component ('add' or 'mul').
-    seasonal_periods : int, default 12
-        Length of seasonal cycle.
-    damped_trend : bool, default False
-        Whether to dampen the trend.
-    initialization_method : str, default "estimated"
-        Initialization method for Holt-Winters ('estimated', 'heuristic').
-    random_state : int | None, default 42
-        Random seed for state-space simulation intervals.
-    simulation_repetitions : int, default 2000
-        Number of Monte Carlo paths generated to derive prediction intervals.
-    """
 
-    def __init__(
-        self,
-        trend: str = "add",
-        seasonal: str = "add",
-        seasonal_periods: int = 12,
-        damped_trend: bool = False,
-        initialization_method: str = "estimated",
-        random_state: int | None = 42,
-        simulation_repetitions: int = 2000,
-    ) -> None:
-        self.trend: str | None = trend
-        self.seasonal: str | None = seasonal
-        self.seasonal_periods: int = seasonal_periods
-        self.damped_trend: bool = damped_trend
-        self.initialization_method: str = initialization_method
-        self.random_state: int | None = random_state
-        self.simulation_repetitions: int = simulation_repetitions
+def __getattr__(name: str) -> Any:
+    """Lazy import fallback for HoltWintersForecaster to prevent circular import."""
+    if name == "HoltWintersForecaster":
+        from src.forecasting.holt_winters import HoltWintersForecaster
+        return HoltWintersForecaster
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
-        self._history: np.ndarray | None = None
-        self._fitted_model: HoltWintersResults | None = None
 
-    @property
-    def is_fitted(self) -> bool:
-        """Whether model has been fitted."""
-        return self._fitted_model is not None
+__all__ = [
+    "ForecastResult",
+    "BaseForecaster",
+    "SeasonalNaiveForecaster",
+    "HoltWintersForecaster",
+]
 
-    @property
-    def fitted_values(self) -> np.ndarray:
-        """In-sample fitted values."""
-        if self._fitted_model is None:
-            raise RuntimeError("Model must be fitted before accessing fitted_values.")
-        return np.asarray(self._fitted_model.fittedvalues, dtype=float)
-
-    @property
-    def residuals(self) -> np.ndarray:
-        """In-sample residuals (actual - fitted)."""
-        if self._fitted_model is None:
-            raise RuntimeError("Model must be fitted before accessing residuals.")
-        return np.asarray(self._fitted_model.resid, dtype=float)
-
-    @property
-    def model_summary(self) -> str:
-        """Summary text from fitted statsmodels object."""
-        if self._fitted_model is None:
-            raise RuntimeError("Model must be fitted before accessing model_summary.")
-        return str(self._fitted_model.summary())
-
-    def fit(self, series: Sequence[float] | np.ndarray | pd.Series) -> HoltWintersForecaster:
-        """
-        Fit Holt-Winters Exponential Smoothing model.
-
-        Requires at least 2 full seasonal cycles (len(series) >= 2 * seasonal_periods).
-        """
-        min_len = 2 * self.seasonal_periods
-        y = _validate_input_series(series, min_length=min_len)
-        self._history = y
-
-        model = ExponentialSmoothing(
-            y,
-            trend=self.trend,
-            seasonal=self.seasonal,
-            seasonal_periods=self.seasonal_periods,
-            damped_trend=self.damped_trend,
-            initialization_method=self.initialization_method,
-        )
-        self._fitted_model = model.fit()
-        return self
-
-    def predict(
-        self,
-        steps: int = 12,
-        confidence_level: float = 0.95,
-    ) -> ForecastResult:
-        """
-        Generate point forecasts and prediction intervals using state-space simulation.
-
-        Parameters
-        ----------
-        steps : int, default 12
-            Forecast horizon length.
-        confidence_level : float, default 0.95
-            Prediction interval coverage level (e.g. 0.95 for 95% PI).
-
-        Returns
-        -------
-        ForecastResult
-            Contains point forecasts, lower bound (>= 0), and upper bound.
-        """
-        if self._fitted_model is None or self._history is None:
-            raise RuntimeError("Model must be fitted before predict() is called.")
-
-        if steps <= 0:
-            raise ValueError(f"Steps must be a positive integer, got {steps}.")
-
-        if not (0.0 < confidence_level < 1.0):
-            raise ValueError(
-                f"Confidence level must be between 0 and 1 exclusive, got {confidence_level}."
-            )
-
-        # 1. Point forecast
-        point_preds = np.asarray(self._fitted_model.forecast(steps), dtype=float)
-
-        # 2. State-space simulated prediction intervals
-        rng = np.random.default_rng(self.random_state)
-        sim = self._fitted_model.simulate(
-            nsimulations=steps,
-            repetitions=self.simulation_repetitions,
-            error="add",
-            rng=rng,
-        )
-
-        alpha = 1.0 - confidence_level
-        lower_pct = (alpha / 2.0) * 100.0
-        upper_pct = (1.0 - alpha / 2.0) * 100.0
-
-        lower_bound = np.percentile(sim, lower_pct, axis=1)
-        upper_bound = np.percentile(sim, upper_pct, axis=1)
-
-        # Enforce physical reality: non-negative and bound sandwiching
-        lower_bound = np.maximum(0.0, lower_bound)
-        lower_bound = np.minimum(lower_bound, point_preds)
-        upper_bound = np.maximum(upper_bound, point_preds)
-
-        return ForecastResult(
-            point_forecast=point_preds,
-            lower_bound=lower_bound,
-            upper_bound=upper_bound,
-            confidence_level=confidence_level,
-            model_name="HoltWintersAdditive",
-            residuals=self.residuals,
-        )

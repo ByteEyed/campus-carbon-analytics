@@ -1,0 +1,10 @@
+target,target_label,model,mae_kg,rmse_kg,mape_pct,coverage_95_pct,mae_improvement_vs_seasonal_naive_pct
+total_emissions_kg,Total Campus Emissions (kgCO2e),Standard Naive (Flat),50329.8289,55002.1704,39.4989,,
+total_emissions_kg,Total Campus Emissions (kgCO2e),Seasonal Naive (m=12),2378.8508,2794.1534,1.9547,,0.0
+total_emissions_kg,Total Campus Emissions (kgCO2e),Holt-Winters (Additive Trend & Season),1548.2004,1975.93,1.2657,100.0,34.92
+electricity_emissions_kg,Electricity Emissions (kgCO2e),Standard Naive (Flat),36244.2041,39323.5719,36.0732,,
+electricity_emissions_kg,Electricity Emissions (kgCO2e),Seasonal Naive (m=12),1683.7623,2109.9085,1.7249,,0.0
+electricity_emissions_kg,Electricity Emissions (kgCO2e),Holt-Winters (Additive Trend & Season),1319.2206,1597.1281,1.3822,100.0,21.65
+travel_emissions_kg,Travel Emissions (kgCO2e),Standard Naive (Flat),11774.8834,13197.8094,61.249,,
+travel_emissions_kg,Travel Emissions (kgCO2e),Seasonal Naive (m=12),620.3112,748.5648,3.697,,0.0
+travel_emissions_kg,Travel Emissions (kgCO2e),Holt-Winters (Additive Trend & Season),363.3641,440.9054,2.2632,100.0,41.42
