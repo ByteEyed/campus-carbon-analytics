@@ -49,10 +49,7 @@ streamlit run src/dashboard/app.py
 ```
 The dashboard will open automatically in your web browser, typically at `http://localhost:8501`.
 
-## Deployment
+## Live Application
 
-This dashboard is fully configured for deployment on platforms like **Streamlit Community Cloud**:
-1. Push this repository to GitHub.
-2. Go to [Streamlit Community Cloud](https://share.streamlit.io/) and connect your GitHub account.
-3. Select this repository and set the **Main file path** to `src/dashboard/app.py`.
-4. Click **Deploy!** The platform will automatically install the required packages from `requirements.txt` and launch the app.
+The dashboard is actively deployed and live on Streamlit Community Cloud. You can access it here:  
+ **[Campus Carbon Analytics Dashboard](https://campus-carbon-analytics-quezjwufzhdekckg572a9o.streamlit.app/)**
