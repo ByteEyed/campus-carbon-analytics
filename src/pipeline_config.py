@@ -63,9 +63,50 @@ class PipelineConfig:
     def __post_init__(self) -> None:
         """Validate parameter boundaries and ensure path typing."""
         # Normalize paths
-        object.__setattr__(self, "activity_data_path", Path(self.activity_data_path))
-        object.__setattr__(self, "emission_factors_path", Path(self.emission_factors_path))
-        object.__setattr__(self, "output_dir", Path(self.output_dir))
+        act_p = Path(self.activity_data_path)
+        ef_p = Path(self.emission_factors_path)
+        out_p = Path(self.output_dir)
+
+        object.__setattr__(self, "activity_data_path", act_p)
+        object.__setattr__(self, "emission_factors_path", ef_p)
+        object.__setattr__(self, "output_dir", out_p)
+
+        # Path traversal and boundary security validation
+        for field_name, p in [
+            ("activity_data_path", act_p),
+            ("emission_factors_path", ef_p),
+            ("output_dir", out_p),
+        ]:
+            if ".." in p.parts:
+                raise ValueError(
+                    f"Security violation: path traversal sequence ('..') detected in {field_name}: {p}"
+                )
+
+        resolved_out = out_p.resolve()
+        sensitive_roots = [
+            Path("C:/Windows"),
+            Path("C:/Program Files"),
+            Path("C:/Program Files (x86)"),
+            Path("/etc"),
+            Path("/bin"),
+            Path("/sbin"),
+            Path("/root"),
+            Path("/sys"),
+            Path("/proc"),
+        ]
+        for sroot in sensitive_roots:
+            is_sub = False
+            try:
+                sroot_res = sroot.resolve()
+                if resolved_out == sroot_res or resolved_out.is_relative_to(sroot_res):
+                    is_sub = True
+            except ValueError:
+                # is_relative_to raises ValueError if on different drives on Windows
+                is_sub = False
+            if is_sub:
+                raise ValueError(
+                    f"Security violation: output_dir points to sensitive system directory: {self.output_dir}"
+                )
 
         # Budget constraint validation
         if self.optimization_budget_inr < 0.0:

@@ -94,7 +94,7 @@ streamlit run src/dashboard/app.py --server.port 8501 --server.headless true
 
 The dashboard uses a sidebar-driven Single-Page App (SPA) layout containing five distinct views:
 
-### 4.1 🏛️ Executive Overview
+### 4.1 Executive Overview
 - **Top Metric Cards:**
   - **Total Historical Emissions:** Cumulative campus footprint ($4,196.19\text{ MTCO}_2\text{e}$ across 2023–2025).
   - **Emissions Intensity:** Per student-month intensity ($25.48\text{ kgCO}_2\text{e/student-month}$).
@@ -105,13 +105,13 @@ The dashboard uses a sidebar-driven Single-Page App (SPA) layout containing five
   - **Category Donut Chart:** Breakdown illustrating that grid electricity represents **79.77%** of campus emissions.
 - **Executive Takeaways Box:** Synthesizes dominant Scope 2 drivers, optimization findings, and model robustness.
 
-### 4.2 📊 Historical Accounting
+### 4.2 Historical Accounting
 - **Monthly Stacked Bar Chart:** 36-month timeline showing Electricity, Travel, Waste, and Procurement stacked monthly.
 - **Facility Cumulative Bar Chart:** Total emissions per campus building archetype (Hostel & Dining, Science Complex, Library, Arts, Admin).
 - **Facility Intensity Table:** Mean student headcount and per-student emissions intensity per facility.
 - **Top 10 Emissions Drivers Table:** Audited list of the highest-emitting building-months in the dataset.
 
-### 4.3 📈 Forecasting & Uncertainty
+### 4.3 Forecasting & Uncertainty
 - **Interactive Target Selector:** Filter between Total Campus Emissions, Electricity Emissions, and Travel Emissions.
 - **Model Performance Metrics Cards:** Displays empirical Phase 11 hold-out validation metrics from `primary_model_evaluation_summary.csv`:
   - Mean Absolute Error (MAE): $1,548.20\text{ kgCO}_2\text{e}$
@@ -122,7 +122,7 @@ The dashboard uses a sidebar-driven Single-Page App (SPA) layout containing five
 - **One-at-a-Time (OAT) Variance Decomposition:** Horizontal stacked bar showing the relative share of Forecast Error ($15.0\%$), Activity Measurement Uncertainty ($8.9\%$), and Emission Factor Uncertainty ($76.1\%$).
 - **2026 Forecast Schedule Table:** Point forecasts, lower bounds, upper bounds, and uncertainty spreads for each month of 2026.
 
-### 4.4 💡 Decarbonization Scenarios
+### 4.4 Decarbonization Scenarios
 - **Standalone Abatement Bar Chart:** Visualizes marginal carbon avoided ($\text{MTCO}_2\text{e}$) across the 5 canonical interventions (`INT-001` through `INT-005`).
 - **Comprehensive Financial & Abatement Table:**
   - Intervention ID and Name
@@ -134,14 +134,14 @@ The dashboard uses a sidebar-driven Single-Page App (SPA) layout containing five
   - Marginal Abatement Cost (₹/kgCO₂e)
 - **Marginal Abatement Cost (MAC) Insights Box:** Highlights that LED Lighting (`INT-001`, ₹3.65/kg) and AC Optimization (`INT-003`, ₹4.16/kg) provide the greatest capital efficiency.
 
-### 4.5 🎯 Portfolio Optimization
+### 4.5 Portfolio Optimization
 - **Optimal Portfolio Callout Banner:** Prominently details the selected optimal portfolio (`P-10110`), active projects (`INT-001` LED + `INT-003` AC + `INT-004` Waste), capital cost (₹9.5 Lakhs), carbon avoided ($225.8\text{ MTCO}_2\text{e}$), and remaining surplus (₹15.5 Lakhs).
 - **Interactive Efficient Frontier Scatter Plot:**
   - X-axis: Capital Expenditure (INR Lakhs ₹).
   - Y-axis: Annual Avoided Carbon ($\text{MTCO}_2\text{e}$).
   - Feasible portfolios rendered in Navy Blue; Infeasible portfolios in Muted Grey.
   - Budget Cap indicated via a dashed vertical line at ₹25 Lakhs.
-  - Optimal Portfolio highlighted with a bold **Gold Star (★)** marker.
+  - Optimal Portfolio highlighted with a bold **Gold Star** marker.
   - Hover tooltips expose exact intervention combinations and MAC values.
 - **Combinatorial Powerset Explorer Table:** Allows toggling between Feasible Portfolios and the complete 32-portfolio solution space, sortable by carbon avoided.
 

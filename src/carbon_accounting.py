@@ -140,6 +140,11 @@ class EmissionFactorRegistry:
         """Register or update an emission factor."""
         if not isinstance(factor, EmissionFactor):
             raise TypeError(f"Expected EmissionFactor instance, got {type(factor).__name__}")
+        if factor.factor <= 0.0:
+            raise ValueError(
+                f"Emission factor for category '{factor.category}' must be strictly positive (> 0), "
+                f"got {factor.factor}."
+            )
         # Index by both normalized category and activity_type for flexible lookup
         cat_key = factor.category.strip().lower()
         act_key = factor.activity_type.strip().lower()

@@ -238,7 +238,7 @@ def evaluate_portfolio(
             trans_df = inv.apply(trans_df)
 
         scen_emissions_df = calculate_campus_emissions(trans_df, registry)
-        portfolio_emissions_kg = round(float(scen_emissions_df["total_emissions_kg"].sum()), 2)
+        portfolio_emissions_kg = max(0.0, round(float(scen_emissions_df["total_emissions_kg"].sum()), 2))
         total_reduction_kg = round(baseline_emissions_kg - portfolio_emissions_kg, 2)
 
         if baseline_emissions_kg > 0.0:

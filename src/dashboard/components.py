@@ -425,14 +425,14 @@ def create_efficient_frontier_chart(
                 x=[cost_lakhs],
                 y=[red_mt],
                 mode="markers+text",
-                name="★ Selected Optimal Portfolio",
+                name="Selected Optimal Portfolio",
                 marker=dict(color=COLOR_OPTIMAL, size=20, symbol="star", line=dict(color="#000000", width=1.5)),
                 text=[f"  <b>Optimal: {r['portfolio_id']}</b>"],
                 textposition="top right",
                 textfont=dict(size=13, color="#000000"),
                 customdata=[[r["portfolio_id"], r["percentage_reduction"], r["cost_per_kg_reduced"]]],
                 hovertemplate=(
-                    "<b>★ OPTIMAL: %{customdata[0]}</b><br>"
+                    "<b>OPTIMAL: %{customdata[0]}</b><br>"
                     "Cost: ₹%{x:,.1f} Lakhs<br>"
                     "Reduction: %{y:,.1f} MTCO₂e (%{customdata[1]:.1f}%)<br>"
                     "MAC: ₹%{customdata[2]:,.1f}/kg<br>"

@@ -7,7 +7,7 @@
     "random_seed": 42,
     "train_months": 24,
     "forecast_horizon_months": 12,
-    "uncertainty_simulations": 50,
+    "uncertainty_simulations": 1000,
     "baseline_year": 2025,
     "fail_fast": true,
     "export_artifacts_on_finish": true
@@ -29,7 +29,7 @@
   },
   "carbon_accounting": {
     "total_emissions_kg": 4196188.51,
-    "total_emissions_mt": 4196.1885,
+    "total_emissions_mt": 4196.19,
     "emissions_per_student_kg": 25.48,
     "category_contributions": {
       "Electricity": 79.77,

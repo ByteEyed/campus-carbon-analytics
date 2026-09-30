@@ -254,7 +254,8 @@ def evaluate_intervention(
     target_metric_col = "total_emissions_kg" if scope.lower() == "total" else f"{intervention.category.lower()}_emissions_kg"
 
     baseline_emissions_kg = float(base_emissions_df[target_metric_col].sum())
-    scenario_emissions_kg = float(scenario_emissions_df[target_metric_col].sum())
+    # Robustness clamp: enforce non-negative physical scenario emissions
+    scenario_emissions_kg = max(0.0, float(scenario_emissions_df[target_metric_col].sum()))
 
     # 6. Calculate reduction metrics
     absolute_reduction_kg = round(baseline_emissions_kg - scenario_emissions_kg, 4)
@@ -274,7 +275,8 @@ def evaluate_intervention(
     # 8. Category-level metrics for provenance metadata
     cat_col = f"{intervention.category.lower()}_emissions_kg"
     cat_base_kg = float(base_emissions_df[cat_col].sum()) if cat_col in base_emissions_df.columns else baseline_emissions_kg
-    cat_scen_kg = float(scenario_emissions_df[cat_col].sum()) if cat_col in scenario_emissions_df.columns else scenario_emissions_kg
+    cat_scen_raw = float(scenario_emissions_df[cat_col].sum()) if cat_col in scenario_emissions_df.columns else scenario_emissions_kg
+    cat_scen_kg = max(0.0, cat_scen_raw)
     cat_red_kg = round(cat_base_kg - cat_scen_kg, 4)
     cat_pct_red = round((cat_red_kg / cat_base_kg) * 100.0, 4) if cat_base_kg > 0.0 else 0.0
 

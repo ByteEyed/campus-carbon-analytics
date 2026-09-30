@@ -241,7 +241,7 @@ def generate_perturbed_inputs(
         factor_val = float(f.factor)
         if rsd > 0.0:
             noise = float(rng.normal(0.0, rsd))
-            factor_val = max(0.0, factor_val * (1.0 + noise))
+            factor_val = max(1e-6, factor_val * (1.0 + noise))
             factor_val = round(factor_val, 6)
 
         new_f = EmissionFactor(

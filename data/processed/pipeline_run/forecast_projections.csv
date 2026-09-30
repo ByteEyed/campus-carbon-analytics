@@ -1,37 +1,37 @@
 date,target,target_label,point_forecast,lower_bound_95,upper_bound_95
-2026-01-01,total_emissions_kg,Total Campus Emissions (kgCO2e),120494.156,117662.5649,123410.083
-2026-02-01,total_emissions_kg,Total Campus Emissions (kgCO2e),129101.2781,125771.1574,132526.7483
-2026-03-01,total_emissions_kg,Total Campus Emissions (kgCO2e),137351.1988,133832.2492,140814.0288
-2026-04-01,total_emissions_kg,Total Campus Emissions (kgCO2e),141383.0966,137523.3846,144789.0351
-2026-05-01,total_emissions_kg,Total Campus Emissions (kgCO2e),109348.5364,105792.8316,112826.5185
-2026-06-01,total_emissions_kg,Total Campus Emissions (kgCO2e),82569.3861,79147.282,86162.3027
-2026-07-01,total_emissions_kg,Total Campus Emissions (kgCO2e),121522.3816,117642.4019,124847.2053
-2026-08-01,total_emissions_kg,Total Campus Emissions (kgCO2e),141713.9594,137347.5687,145715.2695
-2026-09-01,total_emissions_kg,Total Campus Emissions (kgCO2e),138745.9184,134765.9481,142153.7427
-2026-10-01,total_emissions_kg,Total Campus Emissions (kgCO2e),138466.4653,133628.6718,141836.528
-2026-11-01,total_emissions_kg,Total Campus Emissions (kgCO2e),127869.0951,123768.4699,131565.9595
-2026-12-01,total_emissions_kg,Total Campus Emissions (kgCO2e),74369.1727,69925.6197,77862.671
-2026-01-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),92212.9426,89767.372,94731.3519
-2026-02-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),98427.6276,95491.9584,101544.7803
-2026-03-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),107466.7854,104226.3328,110621.8905
-2026-04-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),112728.3511,109194.0357,115850.2957
-2026-05-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),91827.8177,87993.7925,95287.3332
-2026-06-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),72594.3086,69140.7759,75979.8042
-2026-07-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),99702.021,96002.828,102789.1554
-2026-08-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),111394.8082,107022.2229,115538.8471
-2026-09-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),109017.3397,104932.5201,112568.6667
-2026-10-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),107204.1248,102302.846,110637.7123
-2026-11-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),98708.0809,94363.6627,102375.5326
-2026-12-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),62914.3434,58441.437,66646.6404
-2026-01-01,travel_emissions_kg,Travel Emissions (kgCO2e),20495.2867,19803.892,21207.2739
-2026-02-01,travel_emissions_kg,Travel Emissions (kgCO2e),21397.6431,20551.1958,22174.6383
-2026-03-01,travel_emissions_kg,Travel Emissions (kgCO2e),21219.7785,20396.217,22025.6355
-2026-04-01,travel_emissions_kg,Travel Emissions (kgCO2e),20685.2603,19757.5398,21427.8269
-2026-05-01,travel_emissions_kg,Travel Emissions (kgCO2e),11845.8699,11035.7308,12604.8065
-2026-06-01,travel_emissions_kg,Travel Emissions (kgCO2e),5446.5923,4619.3631,6191.7154
-2026-07-01,travel_emissions_kg,Travel Emissions (kgCO2e),13980.8921,13084.0435,14750.1806
-2026-08-01,travel_emissions_kg,Travel Emissions (kgCO2e),21763.6508,20881.6274,22593.7667
-2026-09-01,travel_emissions_kg,Travel Emissions (kgCO2e),21272.6311,20503.6861,22069.9818
-2026-10-01,travel_emissions_kg,Travel Emissions (kgCO2e),21963.3371,21121.4394,22613.8331
-2026-11-01,travel_emissions_kg,Travel Emissions (kgCO2e),21112.8626,20365.1296,21989.3532
-2026-12-01,travel_emissions_kg,Travel Emissions (kgCO2e),6225.3429,5243.9548,7128.1697
+2026-01-01,total_emissions_kg,Total Campus Emissions (kgCO2e),120494.156,116989.0553,123677.0665
+2026-02-01,total_emissions_kg,Total Campus Emissions (kgCO2e),129101.2781,125821.4103,132537.683
+2026-03-01,total_emissions_kg,Total Campus Emissions (kgCO2e),137351.1988,133766.4184,140988.1405
+2026-04-01,total_emissions_kg,Total Campus Emissions (kgCO2e),141383.0966,137720.385,144911.174
+2026-05-01,total_emissions_kg,Total Campus Emissions (kgCO2e),109348.5364,105767.7518,113013.6738
+2026-06-01,total_emissions_kg,Total Campus Emissions (kgCO2e),82569.3861,78931.4947,86283.6932
+2026-07-01,total_emissions_kg,Total Campus Emissions (kgCO2e),121522.3816,117743.7561,125367.6899
+2026-08-01,total_emissions_kg,Total Campus Emissions (kgCO2e),141713.9594,137938.9203,145533.2295
+2026-09-01,total_emissions_kg,Total Campus Emissions (kgCO2e),138745.9184,134724.8296,142986.0315
+2026-10-01,total_emissions_kg,Total Campus Emissions (kgCO2e),138466.4653,134595.8796,142599.7636
+2026-11-01,total_emissions_kg,Total Campus Emissions (kgCO2e),127869.0951,123894.2777,132027.0714
+2026-12-01,total_emissions_kg,Total Campus Emissions (kgCO2e),74369.1727,70379.0464,78803.4396
+2026-01-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),92212.9426,89185.6794,94961.9385
+2026-02-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),98427.6276,95425.1751,101510.7774
+2026-03-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),107466.7854,104181.8898,110881.402
+2026-04-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),112728.3511,109292.9573,116116.6524
+2026-05-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),91827.8177,88310.7528,95439.6959
+2026-06-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),72594.3086,69008.3696,76338.2514
+2026-07-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),99702.021,95794.7734,103621.1658
+2026-08-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),111394.8082,107477.7489,115298.6883
+2026-09-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),109017.3397,104875.431,113372.16
+2026-10-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),107204.1248,103046.7585,111570.8907
+2026-11-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),98708.0809,94594.499,103169.071
+2026-12-01,electricity_emissions_kg,Electricity Emissions (kgCO2e),62914.3434,58611.8864,67596.8863
+2026-01-01,travel_emissions_kg,Travel Emissions (kgCO2e),20495.2867,19639.4399,21272.4638
+2026-02-01,travel_emissions_kg,Travel Emissions (kgCO2e),21397.6431,20614.9603,22228.7889
+2026-03-01,travel_emissions_kg,Travel Emissions (kgCO2e),21219.7785,20399.1687,22035.2183
+2026-04-01,travel_emissions_kg,Travel Emissions (kgCO2e),20685.2603,19880.6419,21495.2047
+2026-05-01,travel_emissions_kg,Travel Emissions (kgCO2e),11845.8699,11033.9277,12665.3198
+2026-06-01,travel_emissions_kg,Travel Emissions (kgCO2e),5446.5923,4675.943,6253.6053
+2026-07-01,travel_emissions_kg,Travel Emissions (kgCO2e),13980.8921,13183.0171,14801.0042
+2026-08-01,travel_emissions_kg,Travel Emissions (kgCO2e),21763.6508,20969.8657,22564.4199
+2026-09-01,travel_emissions_kg,Travel Emissions (kgCO2e),21272.6311,20460.4607,22106.4711
+2026-10-01,travel_emissions_kg,Travel Emissions (kgCO2e),21963.3371,21167.9652,22803.799
+2026-11-01,travel_emissions_kg,Travel Emissions (kgCO2e),21112.8626,20292.3035,21911.837
+2026-12-01,travel_emissions_kg,Travel Emissions (kgCO2e),6225.3429,5443.4598,7044.3699

@@ -1,11 +1,9 @@
 """
 Campus Carbon Analytics - Executive Dashboard Application
 =========================================================
-Academic Project: BDS-36 (T.Y. B.Sc. Data Science, Semester V)
-Academic Year: 2026-27
 
-Phase 17: Executive Dashboard (Streamlit Presentation Layer)
-Orchestrates a 5-page presentation interface consuming static Phase 16 pipeline artifacts.
+Executive Dashboard (Streamlit Presentation Layer)
+Orchestrates a 5-page presentation interface consuming static pipeline artifacts.
 Strictly read-only: does not execute any model training, simulation, or optimization.
 """
 
@@ -54,11 +52,10 @@ def setup_page() -> None:
     """Configure Streamlit page layout and title."""
     st.set_page_config(
         page_title="Campus Carbon Analytics | Executive Dashboard",
-        page_icon="🌱",
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    # Custom CSS for academic, high-contrast, clean layout
+    # Custom CSS for high-contrast, clean layout
     st.markdown(
         """
         <style>
@@ -102,24 +99,24 @@ def render_sidebar(data: dict) -> str:
     cfg = summary.get("config", {})
     opt = summary.get("optimal_portfolio", {})
 
-    st.sidebar.markdown("## 🌿 Campus Carbon Analytics")
-    st.sidebar.caption("Academic Project BDS-36 | Semester V (2026-27)")
+    st.sidebar.markdown("## Campus Carbon Analytics")
+    st.sidebar.caption("Decarbonization Decision Support System")
     st.sidebar.markdown("---")
 
     page = st.sidebar.radio(
         "Navigate Dashboard Pages:",
         [
-            "🏛️ Executive Overview",
-            "📊 Historical Accounting",
-            "📈 Forecasting & Uncertainty",
-            "💡 Decarbonization Scenarios",
-            "🎯 Portfolio Optimization",
+            "Executive Overview",
+            "Historical Accounting",
+            "Forecasting & Uncertainty",
+            "Decarbonization Scenarios",
+            "Portfolio Optimization",
         ],
         index=0,
     )
 
     st.sidebar.markdown("---")
-    st.sidebar.markdown("### 📋 Institutional Scope")
+    st.sidebar.markdown("### Institutional Scope")
     st.sidebar.markdown(f"**Baseline Year:** `{cfg.get('baseline_year', 2025)}`")
     st.sidebar.markdown(f"**Timeline:** `2023–2025 (36 Months)`")
     st.sidebar.markdown(f"**Facilities:** `5 Campus Complexes`")
@@ -128,6 +125,13 @@ def render_sidebar(data: dict) -> str:
     st.sidebar.markdown(f"**Recommended Portfolio:** `{opt.get('portfolio_id', 'P-10110')}`")
 
     st.sidebar.markdown("---")
+    st.sidebar.markdown("### Decision Support Notice")
+    st.sidebar.info(
+        "**System Scope & Advisory Notice**\n\n"
+        "• **Synthetic Activity:** Activity data is synthetically generated for scenario modeling and simulation.\n"
+        "• **Documented Factors:** Emission factors are sourced from statutory standards (CEA CO2 Database and India GHG Program).\n"
+        "• **Decision Support:** Forecasts and optimization models provide exploratory decision-support, not prescriptive mandates."
+    )
     st.sidebar.caption("Data Source: Precomputed Phase 16 Integrated Pipeline Artifacts (Read-Only)")
 
     return page
@@ -135,7 +139,7 @@ def render_sidebar(data: dict) -> str:
 
 def render_overview_page(data: dict) -> None:
     """Page 1: Executive Overview with High-Level KPIs and Condensed Horizon."""
-    st.markdown('<div class="main-header">🏛️ Executive Overview & Decarbonization Roadmap</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Executive Overview & Decarbonization Roadmap</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">High-level institutional carbon performance, emissions intensity, and optimal decarbonization strategy.</div>', unsafe_allow_html=True)
 
     summary = data["summary"]
@@ -207,11 +211,11 @@ def render_overview_page(data: dict) -> None:
     st.markdown(
         """
         <div class="insight-box">
-        <b>Executive Summary & Academic Findings:</b>
+        <b>Executive Summary & Key Findings:</b>
         <ul>
           <li><b>Dominant Scope 2 Footprint:</b> Grid electricity accounts for <b>79.77%</b> of campus emissions, establishing energy efficiency and rooftop solar as the highest-leverage decarbonization avenues.</li>
           <li><b>Budget Optimization Finding:</b> Under the ₹25 Lakh institutional grant, the optimal portfolio is <b>P-10110</b> (LED Retrofit + AC Summer Cycling + Waste Composting). It achieves <b>15.80% carbon reduction</b> (225.8 MTCO₂e) for only <b>₹9.5 Lakhs</b>, conserving ₹15.5 Lakhs in surplus capital.</li>
-          <li><b>Forecasting Robustness:</b> The primary Holt-Winters model captures annual growth (2.5%) and academic seasonality with an empirical test MAPE of <b>1.27%</b> and 100% prediction interval coverage.</li>
+          <li><b>Forecasting Robustness:</b> The primary Holt-Winters model captures annual growth (2.5%) and operational seasonality with an empirical test MAPE of <b>1.27%</b> and 100% prediction interval coverage.</li>
         </ul>
         </div>
         """,
@@ -221,7 +225,7 @@ def render_overview_page(data: dict) -> None:
 
 def render_accounting_page(data: dict) -> None:
     """Page 2: Carbon Accounting & Emissions Breakdown."""
-    st.markdown('<div class="main-header">📊 Campus Carbon Accounting & Historical Breakdown</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Campus Carbon Accounting & Historical Breakdown</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Rigorous Scope 1, 2, and 3 accounting adhering to CEA, India GHG, and DEFRA emission factors.</div>', unsafe_allow_html=True)
 
     # Visual: Monthly Stacked Bar Chart
@@ -236,7 +240,7 @@ def render_accounting_page(data: dict) -> None:
         st.plotly_chart(fig_bldg, use_container_width=True)
 
     with c2:
-        st.markdown("#### 🏢 Facility-Level Cumulative Metrics")
+        st.markdown("#### Facility-Level Cumulative Metrics")
         campus_df = data["campus_emissions"]
         bldg_grp = campus_df.groupby("building").agg(
             total_emissions_mt=("total_emissions_mt", "sum"),
@@ -255,7 +259,7 @@ def render_accounting_page(data: dict) -> None:
         )
 
     st.markdown("---")
-    st.markdown("#### 🔍 Top 10 Monthly Facility Emissions Drivers")
+    st.markdown("#### Top 10 Monthly Facility Emissions Drivers")
     top_drivers = (
         campus_df[["date", "building", "electricity_emissions_kg", "travel_emissions_kg", "waste_emissions_kg", "total_emissions_kg", "total_emissions_mt"]]
         .sort_values("total_emissions_kg", ascending=False)
@@ -276,7 +280,7 @@ def render_accounting_page(data: dict) -> None:
 
 def render_forecasting_page(data: dict) -> None:
     """Page 3: Primary Forecasting Model & Uncertainty Analysis."""
-    st.markdown('<div class="main-header">📈 Time Series Forecasting & Uncertainty Quantification</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Time Series Forecasting & Uncertainty Quantification</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Exponential Smoothing (Holt-Winters) forward projections with state-space simulated prediction intervals.</div>', unsafe_allow_html=True)
 
     # Target selection dropdown
@@ -316,7 +320,7 @@ def render_forecasting_page(data: dict) -> None:
     st.markdown("---")
 
     # Uncertainty Quantification (Variance Decomposition)
-    st.markdown("#### 🔬 One-at-a-Time (OAT) Monte Carlo Variance Decomposition")
+    st.markdown("#### One-at-a-Time (OAT) Monte Carlo Variance Decomposition")
     st.caption("Quantifies the isolated contribution of Forecast State-Space Error, Activity Measurement Error, and Emission Factor Conversion Error to total forecast uncertainty.")
 
     fig_var = create_variance_decomposition_chart(
@@ -326,7 +330,7 @@ def render_forecasting_page(data: dict) -> None:
     st.plotly_chart(fig_var, use_container_width=True)
 
     # 12-Month Monte Carlo Simulation Trajectory Table
-    st.markdown("#### 📅 2026 Forecast Schedule with 95% Prediction Bounds")
+    st.markdown("#### 2026 Forecast Schedule with 95% Prediction Bounds")
     fc_sub = data["forecast_projections"][data["forecast_projections"]["target"] == target_col].copy()
     fc_sub["uncertainty_spread_kg"] = fc_sub["upper_bound_95"] - fc_sub["lower_bound_95"]
     fc_sub = fc_sub[["date", "point_forecast", "lower_bound_95", "upper_bound_95", "uncertainty_spread_kg"]].reset_index(drop=True)
@@ -342,7 +346,7 @@ def render_forecasting_page(data: dict) -> None:
 
 def render_scenarios_page(data: dict) -> None:
     """Page 4: Standalone Decarbonization Scenarios."""
-    st.markdown('<div class="main-header">💡 Standalone Decarbonization Scenarios</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Standalone Decarbonization Scenarios</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Isolated One-At-a-Time (OAT) marginal emissions reduction and cost efficiency of candidate interventions.</div>', unsafe_allow_html=True)
 
     scen_df = data["scenario_evaluations"]
@@ -354,7 +358,7 @@ def render_scenarios_page(data: dict) -> None:
     st.markdown("---")
 
     # Detailed Table of All 5 Interventions
-    st.markdown("#### 📋 Comprehensive Intervention Financial & Abatement Table")
+    st.markdown("#### Comprehensive Intervention Financial & Abatement Table")
     display_df = scen_df.copy()
     display_df["implementation_cost_lakhs"] = (display_df["implementation_cost_inr"] / 100000.0).round(2)
     display_df["absolute_reduction_mt"] = (display_df["absolute_reduction_kg"] / 1000.0).round(2)
@@ -403,7 +407,7 @@ def render_scenarios_page(data: dict) -> None:
 
 def render_optimization_page(data: dict) -> None:
     """Page 5: Constrained Portfolio Budget Optimization & Efficient Frontier."""
-    st.markdown('<div class="main-header">🎯 Constrained Portfolio Budget Optimization</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">Constrained Portfolio Budget Optimization</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Exhaustive powerset evaluation (32 combinations) resolving combinatorial interactions without double-counting.</div>', unsafe_allow_html=True)
 
     summary = data["summary"]
@@ -424,7 +428,7 @@ def render_optimization_page(data: dict) -> None:
     st.markdown(
         f"""
         <div class="insight-box">
-        <h4 style="margin-top:0; color:#1a365d;">★ Selected Optimal Portfolio: <code>{opt_id}</code></h4>
+        <h4 style="margin-top:0; color:#1a365d;">Selected Optimal Portfolio: <code>{opt_id}</code></h4>
         <p><b>Included Initiatives:</b> {sel_invs}</p>
         <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
           <div><b>Capital Expenditure:</b> ₹{cost_val/100000.0:,.2f} Lakhs</div>
@@ -448,7 +452,7 @@ def render_optimization_page(data: dict) -> None:
     st.markdown("---")
 
     # Interactive Portfolio Table Explorer
-    st.markdown("#### 🔍 Combinatorial Powerset Solution Space (All 32 Combinations)")
+    st.markdown("#### Combinatorial Powerset Solution Space (All 32 Combinations)")
     filter_mode = st.radio(
         "Display Portfolios:",
         ["Feasible Only (Within Budget)", "All 32 Portfolios (Including Over-Budget)"],
@@ -497,31 +501,43 @@ def main() -> None:
         data = load_dashboard_data(DEFAULT_RUN_DIR)
     except (DashboardDataError, FileNotFoundError) as exc:
         st.error(
-            "⚠️ **Pipeline Artifacts Not Found or Incomplete**\n\n"
+            "**Pipeline Artifacts Not Found or Incomplete**\n\n"
             "The executive dashboard is a read-only presentation interface that consumes precomputed "
             "Phase 16 pipeline outputs. Please execute the integrated pipeline before launching the dashboard:\n\n"
             "```bash\npython -m src.pipeline\n```"
         )
-        with st.expander("🛠️ Technical Diagnostic Details"):
+        with st.expander("Technical Diagnostic Details"):
             st.code(str(exc))
         st.stop()
     except Exception as exc:
-        st.error(f"⚠️ **Unexpected Error Ingesting Dashboard Data:** {exc}")
+        st.error(f"**Unexpected Error Ingesting Dashboard Data:** {exc}")
         st.stop()
 
     # Render Sidebar and Route Pages
     page = render_sidebar(data)
 
-    if page == "🏛️ Executive Overview":
+    if page == "Executive Overview":
         render_overview_page(data)
-    elif page == "📊 Historical Accounting":
+    elif page == "Historical Accounting":
         render_accounting_page(data)
-    elif page == "📈 Forecasting & Uncertainty":
+    elif page == "Forecasting & Uncertainty":
         render_forecasting_page(data)
-    elif page == "💡 Decarbonization Scenarios":
+    elif page == "Decarbonization Scenarios":
         render_scenarios_page(data)
-    elif page == "🎯 Portfolio Optimization":
+    elif page == "Portfolio Optimization":
         render_optimization_page(data)
+
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style="font-size: 0.8rem; color: #718096; text-align: center; padding: 1.5rem 0;">
+            <strong>Campus Carbon Analytics System</strong><br/>
+            <em>Disclaimer:</em> Activity data and intervention scenarios are simulated decision-support models. 
+            All analytical outputs are intended solely for institutional planning and decision-support exploration.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 if __name__ == "__main__":
