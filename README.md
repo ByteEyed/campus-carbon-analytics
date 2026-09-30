@@ -52,4 +52,4 @@ The dashboard will open automatically in your web browser, typically at `http://
 ## Live Application
 
 The dashboard is actively deployed and live on Streamlit Community Cloud. You can access it here:  
- **[Campus Carbon Analytics Dashboard](https://campus-carbon-analytics-quezjwufzhdekckg572a9o.streamlit.app/)**
+ **[Campus Carbon Analytics Dashboard](https://campus-carbon-analytics-4btljdblaqurjmtlaergdj.streamlit.app/)**
