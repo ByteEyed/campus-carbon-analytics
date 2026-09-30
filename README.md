@@ -1,4 +1,4 @@
-# Campus Carbon Forecasting and Decarbonization Scenario Analytics (BDS-36)
+# Campus Carbon Forecasting and Decarbonization Scenario Analytics
 
 This project is an academic prototype designed to perform comprehensive carbon accounting, forecasting, and decarbonization scenario analytics for campus environments. 
 
@@ -56,8 +56,3 @@ This dashboard is fully configured for deployment on platforms like **Streamlit 
 2. Go to [Streamlit Community Cloud](https://share.streamlit.io/) and connect your GitHub account.
 3. Select this repository and set the **Main file path** to `src/dashboard/app.py`.
 4. Click **Deploy!** The platform will automatically install the required packages from `requirements.txt` and launch the app.
-
-## Academic Context
-T.Y. B.Sc. Data Science Semester V (Academic Year 2026-27). Developed according to the specifications outlined in `PROJECT_SPEC.md`.
-
-> **Note**: This is an academic prototype utilizing synthetic campus data. Simulated data is clearly distinguished from externally sourced emission factors. Do not use for production financial systems or real-world policy enforcement without verification.
