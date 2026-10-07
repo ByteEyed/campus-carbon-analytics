@@ -92,7 +92,8 @@ def setup_page() -> None:
         .insight-heading {
             margin-top: 0;
             margin-bottom: 0.5rem;
-            color: #1a365d;
+            font-weight: 700;
+            color: inherit;
         }
         .insight-box p, .insight-box ul, .insight-box li, .insight-box div {
             color: inherit;
@@ -102,34 +103,6 @@ def setup_page() -> None:
             color: #718096;
             text-align: center;
             padding: 1.5rem 0;
-        }
-
-        /* Dark mode overrides (respecting system and Streamlit dark themes) */
-        @media (prefers-color-scheme: dark) {
-            .main-header {
-                color: #f1f5f9;
-            }
-            .sub-header {
-                color: #94a3b8;
-            }
-            div[data-testid="stMetricValue"] {
-                color: #60a5fa;
-            }
-            .metric-caption {
-                color: #94a3b8;
-            }
-            .insight-box {
-                background-color: rgba(30, 58, 95, 0.35);
-                border: 1px solid rgba(96, 165, 250, 0.25);
-                border-left: 4px solid #60a5fa;
-                color: #f1f5f9;
-            }
-            .insight-heading {
-                color: #93c5fd;
-            }
-            .dashboard-footer {
-                color: #94a3b8;
-            }
         }
         </style>
         """,
