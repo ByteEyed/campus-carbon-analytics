@@ -55,7 +55,7 @@ def setup_page() -> None:
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    # Custom CSS for high-contrast, clean layout
+    # Custom CSS supporting both light and dark themes seamlessly
     st.markdown(
         """
         <style>
@@ -80,12 +80,56 @@ def setup_page() -> None:
             color: #718096;
         }
         .insight-box {
-            background-color: #f7fafc;
+            background-color: rgba(43, 92, 143, 0.08);
+            border: 1px solid rgba(43, 92, 143, 0.18);
             border-left: 4px solid #2b5c8f;
-            padding: 1rem;
-            border-radius: 4px;
+            padding: 1.1rem 1.3rem;
+            border-radius: 6px;
             margin-top: 1rem;
             margin-bottom: 1rem;
+            color: inherit;
+        }
+        .insight-heading {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: #1a365d;
+        }
+        .insight-box p, .insight-box ul, .insight-box li, .insight-box div {
+            color: inherit;
+        }
+        .dashboard-footer {
+            font-size: 0.8rem;
+            color: #718096;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        /* Dark mode overrides (respecting system and Streamlit dark themes) */
+        @media (prefers-color-scheme: dark) {
+            .main-header {
+                color: #f1f5f9;
+            }
+            .sub-header {
+                color: #94a3b8;
+            }
+            div[data-testid="stMetricValue"] {
+                color: #60a5fa;
+            }
+            .metric-caption {
+                color: #94a3b8;
+            }
+            .insight-box {
+                background-color: rgba(30, 58, 95, 0.35);
+                border: 1px solid rgba(96, 165, 250, 0.25);
+                border-left: 4px solid #60a5fa;
+                color: #f1f5f9;
+            }
+            .insight-heading {
+                color: #93c5fd;
+            }
+            .dashboard-footer {
+                color: #94a3b8;
+            }
         }
         </style>
         """,
@@ -428,7 +472,7 @@ def render_optimization_page(data: dict) -> None:
     st.markdown(
         f"""
         <div class="insight-box">
-        <h4 style="margin-top:0; color:#1a365d;">Selected Optimal Portfolio: <code>{opt_id}</code></h4>
+        <h4 class="insight-heading">Selected Optimal Portfolio: <code>{opt_id}</code></h4>
         <p><b>Included Initiatives:</b> {sel_invs}</p>
         <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
           <div><b>Capital Expenditure:</b> ₹{cost_val/100000.0:,.2f} Lakhs</div>
@@ -530,7 +574,7 @@ def main() -> None:
     st.markdown("---")
     st.markdown(
         """
-        <div style="font-size: 0.8rem; color: #718096; text-align: center; padding: 1.5rem 0;">
+        <div class="dashboard-footer">
             <strong>Campus Carbon Analytics System</strong><br/>
             <em>Disclaimer:</em> Activity data and intervention scenarios are simulated decision-support models. 
             All analytical outputs are intended solely for institutional planning and decision-support exploration.
