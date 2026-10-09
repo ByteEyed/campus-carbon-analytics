@@ -77,7 +77,8 @@ class PipelineConfig:
             ("emission_factors_path", ef_p),
             ("output_dir", out_p),
         ]:
-            if ".." in p.parts:
+            path_str = str(p).replace("\\", "/")
+            if ".." in path_str.split("/"):
                 raise ValueError(
                     f"Security violation: path traversal sequence ('..') detected in {field_name}: {p}"
                 )
